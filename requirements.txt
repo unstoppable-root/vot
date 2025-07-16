@@ -106,4 +106,4 @@ websocket-client==1.8.0
 widgetsnbextension==4.0.10
 yarl==1.9.4
 orjson==3.11.0
-python-telegram-bot==20.4
+python-telegram-bot==21.0
