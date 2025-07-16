@@ -1,6 +1,6 @@
 import asyncio
 from aiohttp import ClientSession
-import json
+from ..tools.json_utils import json_dumps
 from pandas import to_datetime, offsets, Timestamp
 from ..tools.functions import dates_delta, manage_asyncio_wait
 
@@ -64,7 +64,7 @@ class FBSPostingList:
         }
         # Для отладки.
         print(body["filter"]["since"], " --> ", body["filter"]["to"], body["offset"])
-        body = json.dumps(body)
+        body = json_dumps(body)
         return body
 
     async def _fetch(self, session: ClientSession, since: Timestamp) -> None:

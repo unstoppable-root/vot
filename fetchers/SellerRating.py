@@ -1,5 +1,5 @@
 import requests
-import json
+from ..tools.json_utils import json_dumps
 from typing import Dict
 
 
@@ -34,7 +34,7 @@ class SellerRating:
         :return: Словарь с информацией о рейтинге магазина.
         """
         try:
-            req = requests.post(self.url, headers=self.headers, data=json.dumps({}))
+            req = requests.post(self.url, headers=self.headers, data=json_dumps({}))
         except ConnectionError:
             raise ConnectionError
         if req.status_code != 200:

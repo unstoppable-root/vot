@@ -1,5 +1,5 @@
 import requests
-import json
+from ..tools.json_utils import json_dumps
 from typing import Dict, AnyStr, List, Tuple
 from copy import deepcopy
 from ..tools.functions import flatten_dict
@@ -70,7 +70,7 @@ class Products:
         :param api_method: API-метод, который будет использован для создания post-запроса.
         """
         try:
-            req = requests.post(api_method, headers=self.headers, data=json.dumps(self.body))
+            req = requests.post(api_method, headers=self.headers, data=json_dumps(self.body))
         except ConnectionError:
             raise ConnectionError()
 
@@ -127,7 +127,7 @@ class Products:
         thousands = (len(products_id) / 1000).__ceil__()
         for n_thousand in range(thousands):
             body = {"product_id": products_id[(1000 * n_thousand):(1000 * (n_thousand + 1))]}
-            body = json.dumps(body)
+            body = json_dumps(body)
 
             try:
                 req = requests.post(self.urls["product_info_list"], headers=self.headers, data=body)

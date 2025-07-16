@@ -1,6 +1,6 @@
 import asyncio
 from aiohttp import ClientSession
-import json
+from ..tools.json_utils import json_dumps
 from pandas import to_datetime, Timestamp
 from dateutil.relativedelta import relativedelta
 from ..tools.functions import manage_asyncio_wait
@@ -63,7 +63,7 @@ class AsyncFinanceRealizationList:
         }
         # Для отладки.
         print(body["filter"]["date"]["from"], " --> ", body["filter"]["date"]["to"], body["page"])
-        body = json.dumps(body)
+        body = json_dumps(body)
         return body
 
     async def _fetch(self, session: ClientSession, date_since: Timestamp, date_to: Timestamp) -> None:
