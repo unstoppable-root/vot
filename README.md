@@ -56,4 +56,49 @@ ___
 Файл `telegram_pnl_bot.py` содержит простой бот. Команда `/pnl` отправляет
 значение прибыли за последнюю неделю. Дополнительно доступна команда
 `/ads_stats`, возвращающая статистику из Ozon Performance API в виде JSON-файла.
+=======
+### Использование
 
+Основной точкой входа является скрипт `telegram_pnl_bot.py`. После запуска бот
+в Telegram будет отвечать на команду `/pnl` и возвращать значение PNL за
+последние 7 дней. Перед запуском необходимо указать переменные окружения:
+
+- `TELEGRAM_BOT_TOKEN` – токен вашего Telegram-бота.
+- `OZON_CLIENT_ID` и `OZON_API_KEY` – данные для доступа к Ozon API.
+
+Для запуска бота напрямую из Python выполните:
+
+```bash
+pip install -r requirements.txt
+python telegram_pnl_bot.py
+```
+
+### Запуск в Docker
+
+В репозитории присутствует `Dockerfile`, позволяющий собрать образ со всеми
+зависимостями. Сборка образа:
+
+```bash
+docker build -t ozon_bot .
+```
+
+Запуск контейнера:
+
+```bash
+docker run -e TELEGRAM_BOT_TOKEN=<token> \
+           -e OZON_CLIENT_ID=<client_id> \
+           -e OZON_API_KEY=<api_key> ozon_bot
+```
+
+Контейнер автоматически запустит Telegram‑бота.
+
+
+### Docker Compose
+
+Для быстрого запуска используйте `docker-compose.yml`. Укажите переменные окружения `TELEGRAM_BOT_TOKEN`, `OZON_CLIENT_ID` и `OZON_API_KEY` и выполните:
+
+```bash
+docker-compose up --build
+```
+
+При желании можно добавить `-d`, чтобы запустить сервис в фоне. Контейнер автоматически запустит Telegram‑бота.
